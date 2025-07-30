@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Muhammad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* New: Luxurious & Elegant Birthday Theme */
+      --background-start: rgb(26, 50, 54);; /* Very deep, dark sapphire blue */
+      --background-end: rgba(26, 49, 54, 0.859);;   /* Slightly lighter deep blue */
+      --text-color-light: #f0f8ff; /* Alice Blue - soft, clean white */
+      --text-color-dark: #0a1128;  /* Matches background start for sharp contrast */
+      --accent-color: #dba99f5f;    /* Pure Gold - for a premium, celebratory feel */
+      --button-hover-color: #e0b400; /* Darker gold on hover */
+      --overlay-bg: rgba(0, 0, 0, 0.85); /* Strong, dark overlay */
+      --border-radius-subtle: 8px;
+      --box-shadow-subtle: 0 8px 25px rgba(0, 0, 0, 0.7); /* Deeper, more pronounced shadows */
+      --box-shadow-accent: 0 0 35px var(--accent-color); /* Strong, vibrant gold glow */
+      --h1-text-shadow: 0 0 40px rgba(255, 255, 255, 0.8); /* Intense white glow for heading */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      /* Updated Background Gradient to deep blues */
+      background: linear-gradient(-45deg, var(--background-start), var(--background-end));
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+      color: var(--text-color-light);
+      box-sizing: border-box;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5em, 8vw, 4.5em);
+      color: var(--text-color-light);
+      text-shadow: var(--h1-text-shadow); /* Bright, clean glow for the message */
+      letter-spacing: 1px;
+      line-height: 1.2;
+      text-align: center;
+      max-width: 90%;
+      box-sizing: border-box;
+      padding: 0 20px;
+      word-wrap: break-word;
+      min-height: 1.2em;
+    }
+
+    .btn {
+      margin-top: 50px;
+      padding: 15px 35px;
+      font-size: clamp(1em, 2vw, 1.1em);
+      font-weight: 700;
+      color: var(--text-color-dark); /* Dark text for contrast on gold button */
+      background-color: var(--accent-color); /* Gold accent button */
+      border: none;
+      border-radius: var(--border-radius-subtle);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: var(--box-shadow-subtle);
+      animation: none;
+    }
+
+    .btn:hover {
+      background-color: var(--button-hover-color);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* Even deeper hover shadow */
+    }
+
+    .start-overlay {
+      position: absolute;
+      background: var(--overlay-bg); /* Dark, near-opaque overlay */
+      color: var(--text-color-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.4em, 4vw, 2em);
+      padding: 30px 60px;
+      border-radius: var(--border-radius-subtle);
+      cursor: pointer;
+      text-align: center;
+      box-shadow: var(--box-shadow-subtle);
+      animation: pulse 2s infinite ease-in-out;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      max-width: 90%;
+      box-sizing: border-box;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: var(--box-shadow-subtle); }
+      50% { transform: scale(1.02); box-shadow: var(--box-shadow-accent); } /* Gold glow */
+      100% { transform: scale(1); box-shadow: var(--box-shadow-subtle); }
+    }
+
+    .start-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="start-overlay" id="startOverlay">
+    Tap to reveal a special message.
+  </div>
+
+  <h1 id="typedText"></h1>
+
+  <button class="btn" id="nextBtn">
+    Dare to go next <span style="margin-left: 8px;">→</span>
+  </button>
+
+  <audio id="typeSound" src="type.mp3" preload="auto" loop></audio>
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <script>
+    const text = "Happiest Birthday Muhammad";
+    const h1 = document.getElementById("typedText");
+    const typeSound = document.getElementById("typeSound");
+    const clickSound = document.getElementById("clickSound");
+    const btn = document.getElementById("nextBtn");
+    const startOverlay = document.getElementById("startOverlay");
+
+    let i = 0;
+    h1.textContent = '';
+
+    function typeWriter() {
+      if (i === 0) {
+        typeSound.currentTime = 1;
+        typeSound.play().catch(() => {});
+      }
+
+      if (i < text.length) {
+        h1.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80);
+      } else {
+        typeSound.pause();
+        typeSound.currentTime = 0;
+        btn.style.opacity = 1;
+        btn.style.transform = 'translateY(0)';
+      }
+    }
+
+    startOverlay.addEventListener("click", () => {
+      startOverlay.classList.add('hidden');
+      setTimeout(() => {
+        startOverlay.style.display = "none";
+        setTimeout(typeWriter, 500);
+      }, 500);
+    });
+
+    btn.addEventListener("click", () => {
+      clickSound.currentTime = 0;
+      clickSound.volume = 1.0;
+      clickSound.play().catch(() => {});
+      setTimeout(() => {
+        window.location.href = 'page1.html';
+      }, 200);
+    });
+  </script>
+</body>
+</html>
