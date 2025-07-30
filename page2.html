@@ -6,19 +6,19 @@
   <title>Our Connection — Little Chaos</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* CSS Variables for a consistent, professional dark theme */
+    /* NEW THEME: Ultra Soft, Deep & Muted Blue-Grey with Subtle Cool Silver Accents */
     :root {
-      --background-start: #172433; /* Deeper, very muted blue-grey */
-      --background-end: #21303e;   /* Slightly lighter, gentle blue-grey */
-      --text-color-light: #d0d7dd; /* Soft, cool off-white for main text */
-      --text-color-dark: #172433;  /* Matches background start for button text */
-      --accent-color: #9eb2c2;    /* Professional Orange for accents */
-      --button-hover-color: #8397a7; /* Darker Orange on hover */
-      --overlay-bg-dark: rgba(0, 0, 0, 0.75); /* Darker overlay for modals/background */
-      --overlay-bg-light: rgba(255, 255, 255, 0.1); /* Very light, subtle overlay for some elements */
-      --border-radius-subtle: 8px; /* Consistent rounded corners */
-      --box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4); /* Soft, deep shadow */
-      --box-shadow-accent: 0 0 10px var(--accent-color); /* Subtle accent glow */
+      --background-start: #151e28; /* Even deeper, very muted blue-grey */
+      --background-end: #1f2a36;   /* Slightly lighter, gentle blue-grey */
+      --text-color-light: #cdd4db; /* Very soft, cool light grey for main text */
+      --text-color-dark: #151e28;  /* Matches background start for button text */
+      --accent-color: #8fa1b1;    /* Desaturated, soft silver-blue - very subtle accent */
+      --button-hover-color: #7a8b9a; /* Darker desaturated silver-blue on hover */
+      --overlay-bg-dark: rgba(0, 0, 0, 0.45); /* Very light overlay, allows background to show more */
+      --overlay-bg-light: rgba(255, 255, 255, 0.02); /* Extremely subtle for light overlays */
+      --border-radius-subtle: 8px;
+      --box-shadow-subtle: 0 1px 6px rgba(0, 0, 0, 0.2); /* Extremely soft, diffuse shadow */
+      --box-shadow-accent: 0 0 5px var(--accent-color); /* Very subtle accent glow */
     }
 
     * {
@@ -29,15 +29,14 @@
       margin: 0;
       padding: 0;
       height: 100vh;
-      font-family: 'Montserrat', sans-serif; /* Consistent font */
-      color: var(--text-color-light); /* Default text color */
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color-light);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      position: relative; /* Needed for pseudo-element background */
+      position: relative;
 
-      /* Background gradient animation from previous pages */
       background: linear-gradient(-45deg, var(--background-start), var(--background-end));
       background-size: 400% 400%;
       animation: gradientBG 20s ease infinite;
@@ -49,7 +48,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* REMOVED BACKGROUND IMAGE STYLES */
     body::before {
       content: '';
       position: absolute;
@@ -57,8 +55,10 @@
       left: 0;
       width: 100%;
       height: 100%;
+      /* If you want an image here, add background-image: url('your-image.jpg'); and adjust filter. */
+      /* Example: background-image: url('001.jpg'); */
       background-size: cover;
-      filter: grayscale(50%) brightness(60%);
+      filter: grayscale(20%) brightness(80%) contrast(85%); /* Very soft filter, lowest contrast */
       z-index: -2;
     }
 
@@ -68,17 +68,18 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(44, 62, 80, 0.75); /* Darker, slightly transparent background */
-      backdrop-filter: blur(5px); /* Subtle blur for depth */
-      padding: 20px 30px;
+      background: rgba(21, 30, 40, 0.95); /* Matches new background start, very opaque for readability */
+      backdrop-filter: blur(4px); /* Slightly less blur for faster rendering on mobile */
+      /* Adjusted clamp values for better mobile padding */
+      padding: clamp(15px, 4vw, 25px) clamp(20px, 6vw, 35px);
       border-radius: var(--border-radius-subtle);
       box-shadow: var(--box-shadow-subtle);
-      font-size: clamp(1em, 2.5vw, 1.2em); /* Responsive font size */
+      font-size: clamp(1em, 2.5vw, 1.2em);
       z-index: 3;
-      animation: bounce 2s infinite ease-in-out; /* Smoother bounce */
+      animation: bounce 2s infinite ease-in-out;
       text-align: center;
-      color: var(--text-color-light); /* Light text for readability */
-      max-width: 90%; /* Ensure it stays in frame */
+      color: var(--text-color-light);
+      max-width: 90%; /* Ensures it doesn't spill off screen */
     }
 
     @keyframes bounce {
@@ -86,20 +87,21 @@
         transform: translate(-50%, -50%) scale(1);
       }
       50% {
-        transform: translate(-50%, -50%) scale(1.03); /* Smaller bounce for professionalism */
+        transform: translate(-50%, -50%) scale(1.01);
       }
     }
 
     /* Styling for the interactive circles */
     .circle {
       position: absolute;
-      width: clamp(80px, 15vw, 120px); /* Responsive circle size */
-      height: clamp(80px, 15vw, 120px);
-      background-color: var(--accent-color); /* Accent color */
-      color: var(--text-color-dark); /* Dark text on accent background */
-      font-family: 'Montserrat', sans-serif; /* Consistent font */
-      font-weight: 700; /* Bold text */
-      font-size: clamp(0.8em, 1.8vw, 1em); /* Responsive font size */
+      /* Adjusted clamp values for better mobile sizing */
+      width: clamp(70px, 18vw, 120px);
+      height: clamp(70px, 18vw, 120px);
+      background-color: var(--accent-color);
+      color: var(--text-color-dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.75em, 1.8vw, 1em); /* Adjusted font size for smaller circles */
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -107,12 +109,9 @@
       text-align: center;
       cursor: pointer;
       box-shadow: var(--box-shadow-subtle);
-      transition: transform 0.2s ease, background-color 0.2s ease;
-      /* Circles are visible by default */
+      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
       opacity: 1;
-      transform: scale(1) translateY(0);
-      /* This is the key fix: Re-apply the animation property for floating! */
-      animation-fill-mode: forwards; /* Ensures animation stays at final state if not looping */
+      animation-fill-mode: forwards;
     }
 
     /* Staggered floating animations for circles */
@@ -126,37 +125,36 @@
     .circle:nth-child(8) { animation: circleFloat2 7.8s infinite ease-in-out; }
     .circle:nth-child(9) { animation: circleFloat3 5.5s infinite ease-in-out; }
 
-
     .circle:hover {
       transform: scale(1.1);
-      background-color: var(--button-hover-color); /* Darker orange on hover */
-      z-index: 4; /* Higher z-index on hover to appear above other circles and message */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+      background-color: var(--button-hover-color);
+      z-index: 4;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Floating animations (adjusted slightly for smoother movement) */
+    /* Floating animations */
     @keyframes circleFloat1 {
-      0%   { transform: translate(0, 0); }
-      25%  { transform: translate(100px, -150px); }
-      50%  { transform: translate(-80px, 120px); }
-      75%  { transform: translate(150px, 80px); }
-      100% { transform: translate(0, 0); }
+      0%{ transform: translate(0, 0) scale(1); }
+      25%{ transform: translate(100px, -150px) scale(1); }
+      50%{ transform: translate(-80px, 120px) scale(1); }
+      75%{ transform: translate(150px, 80px) scale(1); }
+      100%{ transform: translate(0, 0) scale(1); }
     }
 
     @keyframes circleFloat2 {
-      0%   { transform: translate(0, 0); }
-      25%  { transform: translate(-150px, 100px); }
-      50%  { transform: translate(120px, -150px); }
-      75%  { transform: translate(-80px, 180px); }
-      100% { transform: translate(0, 0); }
+      0%{ transform: translate(0, 0) scale(1); }
+      25%{ transform: translate(-150px, 100px) scale(1); }
+      50%{ transform: translate(120px, -150px) scale(1); }
+      75%{ transform: translate(-80px, 180px) scale(1); }
+      100%{ transform: translate(0, 0) scale(1); }
     }
 
     @keyframes circleFloat3 {
-      0%   { transform: translate(0, 0); }
-      25%  { transform: translate(200px, 150px); }
-      50%  { transform: translate(-120px, -120px); }
-      75%  { transform: translate(80px, 200px); }
-      100% { transform: translate(0, 0); }
+      0% { transform: translate(0, 0) scale(1); }
+      25%{ transform: translate(200px, 150px) scale(1); }
+      50%{ transform: translate(-120px, -120px) scale(1); }
+      75%{ transform: translate(80px, 200px) scale(1); }
+      100%{ transform: translate(0, 0) scale(1); }
     }
 
     /* Modal styling */
@@ -165,19 +163,23 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: var(--background-start); /* Dark theme background for modal */
-      color: var(--text-color-light); /* Light text for modal */
+      background: var(--background-start);
+      color: var(--text-color-light);
       border-radius: var(--border-radius-subtle);
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      /* Adjusted clamp values for better mobile padding */
+      padding: clamp(20px, 6vw, 30px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.25);
       display: none;
       z-index: 10;
-      max-width: 450px; /* Slightly wider modal */
+      /* Crucial for mobile: max-width and fluid width */
+      max-width: 95vw; /* Allow it to take up more width on small screens */
+      width: 450px; /* Base width for larger screens */
       text-align: center;
       animation: fadeIn 0.5s ease forwards;
-      border: 1px solid var(--accent-color); /* Subtle accent border */
-      max-height: 80vh; /* Limit height for long messages */
-      overflow-y: auto; /* Enable scrolling for long content */
+      border: 1px solid var(--accent-color);
+      /* Adjusted max height for better mobile scrolling */
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     @keyframes fadeIn {
@@ -191,17 +193,18 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: var(--overlay-bg-dark); /* Darker overlay for modal background */
+      background: var(--overlay-bg-dark);
       display: none;
       z-index: 5;
     }
 
     /* Close button for modal */
     .close-btn {
-      margin-top: 25px; /* More space */
-      padding: 12px 24px; /* Larger button */
+      /* Adjusted clamp values for better mobile margins/padding */
+      margin-top: clamp(20px, 5vw, 25px);
+      padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
       background-color: var(--accent-color);
-      color: var(--text-color-dark); /* Dark text on button */
+      color: var(--text-color-dark);
       border: none;
       border-radius: var(--border-radius-subtle);
       cursor: pointer;
@@ -212,64 +215,146 @@
 
     .close-btn:hover {
       background-color: var(--button-hover-color);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Title inside the circle (if applicable, though removed from HTML) */
-    .circle-title {
-      font-weight: bold;
-      font-size: 0.9em;
-      padding: 10px;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
     }
 
     /* Next page button at the bottom */
     .next-page {
       position: absolute;
-      bottom: 30px; /* More space from bottom */
+      /* Adjusted clamp values for better mobile positioning/padding */
+      bottom: clamp(20px, 5vw, 30px);
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent-color);
-      color: var(--text-color-dark); /* Dark text on button */
-      padding: 15px 35px; /* Larger button, consistent with index.html */
-      font-size: clamp(1em, 2vw, 1.1em); /* Responsive font size */
+      color: var(--text-color-dark);
+      padding: clamp(12px, 4vw, 18px) clamp(25px, 7vw, 40px);
+      font-size: clamp(1em, 2vw, 1.1em);
       font-weight: 700;
       border: none;
       border-radius: var(--border-radius-subtle);
       cursor: pointer;
       z-index: 2;
       box-shadow: var(--box-shadow-subtle);
-      animation: pulseBtn 2s infinite ease-in-out; /* Renamed keyframe to avoid conflict */
+      animation: pulseBtn 2s infinite ease-in-out;
       transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* New keyframe for the next button pulse to avoid conflict with center message bounce */
     @keyframes pulseBtn {
       0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.02); } /* Smaller pulse for elegance */
+      50% { transform: translateX(-50%) scale(1.002); }
       100% { transform: translateX(-50%) scale(1); }
     }
 
     .next-page:hover {
       background-color: var(--button-hover-color);
-      transform: translateX(-50%) translateY(-2px) scale(1.01); /* Lift and scale slightly */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transform: translateX(-50%) translateY(-1px) scale(1.001);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     /* Styling for highlighted text within modal messages */
     .modal-content-text b {
-      color: var(--accent-color); /* Highlight important phrases with accent color */
+      color: var(--accent-color);
     }
 
     .modal-content-text p {
-      margin-bottom: 1em; /* Spacing between paragraphs in modal */
+      margin-bottom: 1em;
+    }
+
+    /* --- Media Queries for fine-tuning on smaller screens --- */
+    @media (max-width: 600px) {
+      .center-message {
+        font-size: clamp(0.9em, 4vw, 1.1em); /* Slightly smaller font for very small screens */
+        padding: clamp(10px, 3vw, 20px) clamp(15px, 4vw, 30px);
+      }
+
+      .circle {
+        /* Distribute circles better on smaller screens by adjusting their 'top' and 'left' percentages */
+        /* These are just examples, you might need to adjust these more precisely */
+        /* For a highly responsive layout, consider using CSS Grid or Flexbox for circle positioning if they become more structured.
+           For now, slight percentage tweaks might help. */
+        width: clamp(60px, 16vw, 90px); /* Make circles a bit smaller on very small phones */
+        height: clamp(60px, 16vw, 90px);
+        font-size: clamp(0.7em, 1.6vw, 0.9em);
+      }
+
+      /* Example adjustment for a specific circle on small screens */
+      .circle:nth-child(2) { /* HateList */
+        top: 35%; /* Adjust position to avoid overlap */
+        left: 75%;
+      }
+      .circle:nth-child(3) { /* LikeYou */
+        top: 55%;
+        left: 25%;
+      }
+       .circle:nth-child(4) { /* Flash1 */
+        top: 70%;
+        left: 70%;
+      }
+      .circle:nth-child(5) { /* Flash2 */
+        top: 25%;
+        left: 55%;
+      }
+      .circle:nth-child(6) { /* Oops */
+        top: 65%;
+        left: 15%;
+      }
+      .circle:nth-child(7) { /* Secret */
+        top: 85%;
+        left: 85%;
+      }
+      .circle:nth-child(8) { /* Giggles */
+        top: 45%;
+        left: 45%;
+      }
+      .circle:nth-child(9) { /* Truth */
+        top: 100%;
+        left: 40%;
+      }
+
+
+      .modal {
+        padding: clamp(15px, 4vw, 25px); /* More constrained padding for very small modals */
+        max-width: 95vw; /* Ensure it really stays within viewport */
+        max-height: 90vh; /* Allow for vertical scrolling if content is long */
+      }
+
+      .close-btn {
+        padding: clamp(8px, 3vw, 12px) clamp(15px, 5vw, 25px);
+        font-size: clamp(0.9em, 3vw, 1em);
+      }
+
+      .next-page {
+        padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
+        font-size: clamp(0.9em, 2.5vw, 1em);
+      }
+
+      /* Adjust animation translation values for smaller screens if circles move too far */
+      @keyframes circleFloat1 {
+        25%{ transform: translate(70px, -100px) scale(1); }
+        50%{ transform: translate(-50px, 80px) scale(1); }
+        75%{ transform: translate(100px, 60px) scale(1); }
+      }
+
+      @keyframes circleFloat2 {
+        25%{ transform: translate(-100px, 70px) scale(1); }
+        50%{ transform: translate(80px, -100px) scale(1); }
+        75%{ transform: translate(-50px, 120px) scale(1); }
+      }
+
+      @keyframes circleFloat3 {
+        25%{ transform: translate(120px, 100px) scale(1); }
+        50%{ transform: translate(-80px, -80px) scale(1); }
+        75%{ transform: translate(50px, 130px) scale(1); }
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="center-message">
-     Tap a circle to reveal a secret 
+    Tap a circle to reveal a secret
   </div>
 
   <div class="circle" style="top: 10%; left: 15%;" data-message-key="Memory">Memories</div>
@@ -280,7 +365,7 @@
   <div class="circle" style="top: 60%; left: 10%;" data-message-key="Oops">Oops</div>
   <div class="circle" style="top: 80%; left: 80%;" data-message-key="Secret">Secret</div>
   <div class="circle" style="top: 40%; left: 40%;" data-message-key="Giggles">Giggles</div>
-  <div class="circle" style="top: 75%; left: 35%;" data-message-key="Truth">Truth</div>
+  <div class="circle" style="top: 75%; left: 15%;" data-message-key="Truth">Truth</div>
 
   <div class="overlay" id="overlay"></div>
   <div class="modal" id="modal">
