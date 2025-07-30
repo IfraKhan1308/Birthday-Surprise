@@ -23,18 +23,21 @@
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      /* Removed universal margin/padding again to ensure no interference */
+      /* margin: 0; */
+      /* padding: 0; */
     }
 
     body {
-      height: 100vh;
+      margin: 0; /* Ensure no explicit margins are pushing content off */
+      padding: 0; /* Ensure no explicit padding is pushing content off */
+      min-height: 100vh; /* Use min-height to allow content to extend if needed */
       font-family: 'Montserrat', sans-serif;
       color: var(--text-color-light);
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow: hidden; /* Prevent scrolling if elements go out of bounds */
       position: relative;
 
       background: linear-gradient(-45deg, var(--background-start), var(--background-end));
@@ -47,6 +50,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     body::before {
       content: '';
       position: absolute;
@@ -54,10 +58,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* If you want an image here, add background-image: url('your-image.jpg'); and adjust filter. */
-      /* Example: background-image: url('001.jpg'); */
       background-size: cover;
-      filter: grayscale(20%) brightness(80%) contrast(85%); /* Very soft filter, lowest contrast */
+      filter: grayscale(20%) brightness(80%) contrast(85%);
       z-index: -2;
     }
 
@@ -172,7 +174,7 @@
       text-align: center;
       animation: fadeIn 0.5s ease forwards;
       border: 1px solid var(--accent-color);
-      max-height: 85vh; /* Adjusted from 90vh to 85vh to prevent it from getting too tall and potentially pushing button out */
+      max-height: 80vh; /* Keep consistent with general modal max-height */
       overflow-y: auto;
     }
 
@@ -215,8 +217,8 @@
     /* Next page button at the bottom */
     .next-page {
       position: absolute;
-      /* KEY FIX: Increased minimum 'bottom' value to ensure visibility on small screens */
-      bottom: clamp(35px, 100vw, 30px); /* Increased minimum from 20px to 35px */
+      /* Significantly increased 'bottom' to create a larger safe zone for mobile */
+      bottom: clamp(50px, 12vw, 60px); /* Increased minimum and preferred values again */
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent-color);
@@ -277,7 +279,8 @@
       .circle:nth-child(6) { top: 60%; left: 10%; }
       .circle:nth-child(7) { top: 80%; left: 80%; }
       .circle:nth-child(8) { top: 40%; left: 45%; }
-      .circle:nth-child(9) { top: 70%; left: 30%; }
+      /* Adjusted Truth circle position slightly to avoid being too close to the button */
+      .circle:nth-child(9) { top: 65%; left: 30%; }
 
 
       .modal {
@@ -292,15 +295,11 @@
       }
 
       .next-page {
-        /* KEY FIX: Ensure this minimum bottom margin is sufficient for ALL phones */
-        bottom: clamp(40px, 10vw, 50px); /* Slightly reduced for phone-specific media query, still generous */
+        /* Even more generous bottom padding for small mobile screens */
+        bottom: clamp(40px, 10vw, 50px);
         padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
         font-size: clamp(0.9em, 2.5vw, 1em);
       }
-
-    .next-btn:hover {
-      background-color: #e63950;
-    }
 
       /* Adjust animation translation values for smaller screens if circles move too far */
       @keyframes circleFloat1 {
