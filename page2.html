@@ -68,9 +68,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(21, 30, 40, 0.95); /* Matches new background start, very opaque for readability */
-      backdrop-filter: blur(4px); /* Slightly less blur for faster rendering on mobile */
-      /* Adjusted clamp values for better mobile padding */
+      background: rgba(21, 30, 40, 0.95);
+      backdrop-filter: blur(4px);
       padding: clamp(15px, 4vw, 25px) clamp(20px, 6vw, 35px);
       border-radius: var(--border-radius-subtle);
       box-shadow: var(--box-shadow-subtle);
@@ -79,7 +78,7 @@
       animation: bounce 2s infinite ease-in-out;
       text-align: center;
       color: var(--text-color-light);
-      max-width: 90%; /* Ensures it doesn't spill off screen */
+      max-width: 90%;
     }
 
     @keyframes bounce {
@@ -94,14 +93,13 @@
     /* Styling for the interactive circles */
     .circle {
       position: absolute;
-      /* Adjusted clamp values for better mobile sizing */
       width: clamp(70px, 18vw, 120px);
       height: clamp(70px, 18vw, 120px);
       background-color: var(--accent-color);
       color: var(--text-color-dark);
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: clamp(0.75em, 1.8vw, 1em); /* Adjusted font size for smaller circles */
+      font-size: clamp(0.75em, 1.8vw, 1em);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -150,7 +148,7 @@
     }
 
     @keyframes circleFloat3 {
-      0% { transform: translate(0, 0) scale(1); }
+      0%{ transform: translate(0, 0) scale(1); }
       25%{ transform: translate(200px, 150px) scale(1); }
       50%{ transform: translate(-120px, -120px) scale(1); }
       75%{ transform: translate(80px, 200px) scale(1); }
@@ -166,19 +164,16 @@
       background: var(--background-start);
       color: var(--text-color-light);
       border-radius: var(--border-radius-subtle);
-      /* Adjusted clamp values for better mobile padding */
       padding: clamp(20px, 6vw, 30px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.25);
       display: none;
       z-index: 10;
-      /* Crucial for mobile: max-width and fluid width */
-      max-width: 95vw; /* Allow it to take up more width on small screens */
-      width: 450px; /* Base width for larger screens */
+      max-width: 95vw;
+      width: 450px;
       text-align: center;
       animation: fadeIn 0.5s ease forwards;
       border: 1px solid var(--accent-color);
-      /* Adjusted max height for better mobile scrolling */
-      max-height: 90vh;
+      max-height: 85vh; /* Adjusted from 90vh to 85vh to prevent it from getting too tall and potentially pushing button out */
       overflow-y: auto;
     }
 
@@ -200,7 +195,6 @@
 
     /* Close button for modal */
     .close-btn {
-      /* Adjusted clamp values for better mobile margins/padding */
       margin-top: clamp(20px, 5vw, 25px);
       padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
       background-color: var(--accent-color);
@@ -222,8 +216,8 @@
     /* Next page button at the bottom */
     .next-page {
       position: absolute;
-      /* Adjusted clamp values for better mobile positioning/padding */
-      bottom: clamp(20px, 5vw, 30px);
+      /* KEY FIX: Increased minimum 'bottom' value to ensure visibility on small screens */
+      bottom: clamp(35px, 8vw, 45px); /* Increased minimum from 20px to 35px */
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent-color);
@@ -265,59 +259,32 @@
     /* --- Media Queries for fine-tuning on smaller screens --- */
     @media (max-width: 600px) {
       .center-message {
-        font-size: clamp(0.9em, 4vw, 1.1em); /* Slightly smaller font for very small screens */
+        font-size: clamp(0.9em, 4vw, 1.1em);
         padding: clamp(10px, 3vw, 20px) clamp(15px, 4vw, 30px);
       }
 
       .circle {
-        /* Distribute circles better on smaller screens by adjusting their 'top' and 'left' percentages */
-        /* These are just examples, you might need to adjust these more precisely */
-        /* For a highly responsive layout, consider using CSS Grid or Flexbox for circle positioning if they become more structured.
-           For now, slight percentage tweaks might help. */
-        width: clamp(60px, 16vw, 90px); /* Make circles a bit smaller on very small phones */
+        width: clamp(60px, 16vw, 90px);
         height: clamp(60px, 16vw, 90px);
         font-size: clamp(0.7em, 1.6vw, 0.9em);
       }
 
-      /* Example adjustment for a specific circle on small screens */
-      .circle:nth-child(2) { /* HateList */
-        top: 35%; /* Adjust position to avoid overlap */
-        left: 75%;
-      }
-      .circle:nth-child(3) { /* LikeYou */
-        top: 55%;
-        left: 25%;
-      }
-       .circle:nth-child(4) { /* Flash1 */
-        top: 70%;
-        left: 70%;
-      }
-      .circle:nth-child(5) { /* Flash2 */
-        top: 25%;
-        left: 55%;
-      }
-      .circle:nth-child(6) { /* Oops */
-        top: 65%;
-        left: 15%;
-      }
-      .circle:nth-child(7) { /* Secret */
-        top: 85%;
-        left: 85%;
-      }
-      .circle:nth-child(8) { /* Giggles */
-        top: 45%;
-        left: 45%;
-      }
-      .circle:nth-child(9) { /* Truth */
-        top: 100%;
-        left: 40%;
-      }
+      /* Adjusted circle positions for better mobile layout */
+      .circle:nth-child(1) { top: 10%; left: 10%; }
+      .circle:nth-child(2) { top: 30%; left: 75%; }
+      .circle:nth-child(3) { top: 55%; left: 20%; }
+      .circle:nth-child(4) { top: 75%; left: 65%; }
+      .circle:nth-child(5) { top: 20%; left: 50%; }
+      .circle:nth-child(6) { top: 60%; left: 10%; }
+      .circle:nth-child(7) { top: 80%; left: 80%; }
+      .circle:nth-child(8) { top: 40%; left: 45%; }
+      .circle:nth-child(9) { top: 70%; left: 30%; }
 
 
       .modal {
-        padding: clamp(15px, 4vw, 25px); /* More constrained padding for very small modals */
-        max-width: 95vw; /* Ensure it really stays within viewport */
-        max-height: 90vh; /* Allow for vertical scrolling if content is long */
+        padding: clamp(15px, 4vw, 25px);
+        max-width: 95vw;
+        max-height: 85vh; /* Keep consistent with general modal max-height */
       }
 
       .close-btn {
@@ -326,6 +293,8 @@
       }
 
       .next-page {
+        /* KEY FIX: Ensure this minimum bottom margin is sufficient for ALL phones */
+        bottom: clamp(30px, 7vw, 40px); /* Slightly reduced for phone-specific media query, still generous */
         padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
         font-size: clamp(0.9em, 2.5vw, 1em);
       }
@@ -365,7 +334,7 @@
   <div class="circle" style="top: 60%; left: 10%;" data-message-key="Oops">Oops</div>
   <div class="circle" style="top: 80%; left: 80%;" data-message-key="Secret">Secret</div>
   <div class="circle" style="top: 40%; left: 40%;" data-message-key="Giggles">Giggles</div>
-  <div class="circle" style="top: 75%; left: 15%;" data-message-key="Truth">Truth</div>
+  <div class="circle" style="top: 75%; left: 5%;" data-message-key="Truth">Truth</div>
 
   <div class="overlay" id="overlay"></div>
   <div class="modal" id="modal">
@@ -400,10 +369,9 @@
 
     // Function to display message in modal
     function showMessage(event) {
-      // Use event.target.dataset.messageKey to get the key from the clicked circle
       const key = event.target.dataset.messageKey;
       if (messages && messages.hasOwnProperty(key)) {
-        modalContent.innerHTML = messages [key]; // Insert the message
+        modalContent.innerHTML = messages[key];
         modal.style.display = 'block';
         overlay.style.display = 'block';
       } else {
@@ -419,7 +387,6 @@
 
     // Function to navigate to the next page
     function goToNext() {
-      // Replace with your actual next page URL (e.g., 'page3.html' or 'final.html')
       window.location.href = "page3.html";
     }
 
@@ -430,8 +397,8 @@
 
     // Attach event listeners to modal buttons
     closeModalBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal); // Close modal when clicking outside
-    nextPageBtn.addEventListener('click', goToNext); // Attach listener to the next page button
+    overlay.addEventListener('click', closeModal);
+    nextPageBtn.addEventListener('click', goToNext);
   </script>
 
 </body>
