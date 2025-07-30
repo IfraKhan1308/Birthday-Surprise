@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Connection — Little Chaos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables for a consistent, professional dark theme */
+    :root {
+      --background-start: #172433; /* Deeper, very muted blue-grey */
+      --background-end: #21303e;   /* Slightly lighter, gentle blue-grey */
+      --text-color-light: #d0d7dd; /* Soft, cool off-white for main text */
+      --text-color-dark: #172433;  /* Matches background start for button text */
+      --accent-color: #9eb2c2;    /* Professional Orange for accents */
+      --button-hover-color: #8397a7; /* Darker Orange on hover */
+      --overlay-bg-dark: rgba(0, 0, 0, 0.75); /* Darker overlay for modals/background */
+      --overlay-bg-light: rgba(255, 255, 255, 0.1); /* Very light, subtle overlay for some elements */
+      --border-radius-subtle: 8px; /* Consistent rounded corners */
+      --box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4); /* Soft, deep shadow */
+      --box-shadow-accent: 0 0 10px var(--accent-color); /* Subtle accent glow */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Montserrat', sans-serif; /* Consistent font */
+      color: var(--text-color-light); /* Default text color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative; /* Needed for pseudo-element background */
+
+      /* Background gradient animation from previous pages */
+      background: linear-gradient(-45deg, var(--background-start), var(--background-end));
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* REMOVED BACKGROUND IMAGE STYLES */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      filter: grayscale(50%) brightness(60%);
+      z-index: -2;
+    }
+
+    /* Main message in the center */
+    .center-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(44, 62, 80, 0.75); /* Darker, slightly transparent background */
+      backdrop-filter: blur(5px); /* Subtle blur for depth */
+      padding: 20px 30px;
+      border-radius: var(--border-radius-subtle);
+      box-shadow: var(--box-shadow-subtle);
+      font-size: clamp(1em, 2.5vw, 1.2em); /* Responsive font size */
+      z-index: 3;
+      animation: bounce 2s infinite ease-in-out; /* Smoother bounce */
+      text-align: center;
+      color: var(--text-color-light); /* Light text for readability */
+      max-width: 90%; /* Ensure it stays in frame */
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.03); /* Smaller bounce for professionalism */
+      }
+    }
+
+    /* Styling for the interactive circles */
+    .circle {
+      position: absolute;
+      width: clamp(80px, 15vw, 120px); /* Responsive circle size */
+      height: clamp(80px, 15vw, 120px);
+      background-color: var(--accent-color); /* Accent color */
+      color: var(--text-color-dark); /* Dark text on accent background */
+      font-family: 'Montserrat', sans-serif; /* Consistent font */
+      font-weight: 700; /* Bold text */
+      font-size: clamp(0.8em, 1.8vw, 1em); /* Responsive font size */
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--box-shadow-subtle);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      /* Circles are visible by default */
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      /* This is the key fix: Re-apply the animation property for floating! */
+      animation-fill-mode: forwards; /* Ensures animation stays at final state if not looping */
+    }
+
+    /* Staggered floating animations for circles */
+    .circle:nth-child(1) { animation: circleFloat1 5s infinite ease-in-out; }
+    .circle:nth-child(2) { animation: circleFloat2 6s infinite ease-in-out; }
+    .circle:nth-child(3) { animation: circleFloat3 7s infinite ease-in-out; }
+    .circle:nth-child(4) { animation: circleFloat1 7.5s infinite ease-in-out; }
+    .circle:nth-child(5) { animation: circleFloat2 6s infinite ease-in-out; }
+    .circle:nth-child(6) { animation: circleFloat3 5.5s infinite ease-in-out; }
+    .circle:nth-child(7) { animation: circleFloat1 5s infinite ease-in-out; }
+    .circle:nth-child(8) { animation: circleFloat2 7.8s infinite ease-in-out; }
+    .circle:nth-child(9) { animation: circleFloat3 5.5s infinite ease-in-out; }
+
+
+    .circle:hover {
+      transform: scale(1.1);
+      background-color: var(--button-hover-color); /* Darker orange on hover */
+      z-index: 4; /* Higher z-index on hover to appear above other circles and message */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+    }
+
+    /* Floating animations (adjusted slightly for smoother movement) */
+    @keyframes circleFloat1 {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(100px, -150px); }
+      50%  { transform: translate(-80px, 120px); }
+      75%  { transform: translate(150px, 80px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes circleFloat2 {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-150px, 100px); }
+      50%  { transform: translate(120px, -150px); }
+      75%  { transform: translate(-80px, 180px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes circleFloat3 {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(200px, 150px); }
+      50%  { transform: translate(-120px, -120px); }
+      75%  { transform: translate(80px, 200px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* Modal styling */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--background-start); /* Dark theme background for modal */
+      color: var(--text-color-light); /* Light text for modal */
+      border-radius: var(--border-radius-subtle);
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 10;
+      max-width: 450px; /* Slightly wider modal */
+      text-align: center;
+      animation: fadeIn 0.5s ease forwards;
+      border: 1px solid var(--accent-color); /* Subtle accent border */
+      max-height: 80vh; /* Limit height for long messages */
+      overflow-y: auto; /* Enable scrolling for long content */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Overlay for modal */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay-bg-dark); /* Darker overlay for modal background */
+      display: none;
+      z-index: 5;
+    }
+
+    /* Close button for modal */
+    .close-btn {
+      margin-top: 25px; /* More space */
+      padding: 12px 24px; /* Larger button */
+      background-color: var(--accent-color);
+      color: var(--text-color-dark); /* Dark text on button */
+      border: none;
+      border-radius: var(--border-radius-subtle);
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: var(--box-shadow-subtle);
+    }
+
+    .close-btn:hover {
+      background-color: var(--button-hover-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Title inside the circle (if applicable, though removed from HTML) */
+    .circle-title {
+      font-weight: bold;
+      font-size: 0.9em;
+      padding: 10px;
+    }
+
+    /* Next page button at the bottom */
+    .next-page {
+      position: absolute;
+      bottom: 30px; /* More space from bottom */
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-color);
+      color: var(--text-color-dark); /* Dark text on button */
+      padding: 15px 35px; /* Larger button, consistent with index.html */
+      font-size: clamp(1em, 2vw, 1.1em); /* Responsive font size */
+      font-weight: 700;
+      border: none;
+      border-radius: var(--border-radius-subtle);
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: var(--box-shadow-subtle);
+      animation: pulseBtn 2s infinite ease-in-out; /* Renamed keyframe to avoid conflict */
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* New keyframe for the next button pulse to avoid conflict with center message bounce */
+    @keyframes pulseBtn {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.02); } /* Smaller pulse for elegance */
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    .next-page:hover {
+      background-color: var(--button-hover-color);
+      transform: translateX(-50%) translateY(-2px) scale(1.01); /* Lift and scale slightly */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Styling for highlighted text within modal messages */
+    .modal-content-text b {
+      color: var(--accent-color); /* Highlight important phrases with accent color */
+    }
+
+    .modal-content-text p {
+      margin-bottom: 1em; /* Spacing between paragraphs in modal */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="center-message">
+     Tap a circle to reveal a secret 
+  </div>
+
+  <div class="circle" style="top: 10%; left: 15%;" data-message-key="Memory">Memories</div>
+  <div class="circle" style="top: 30%; left: 70%;" data-message-key="HateList">HateList</div>
+  <div class="circle" style="top: 50%; left: 30%;" data-message-key="LikeYou">LikeList</div>
+  <div class="circle" style="top: 70%; left: 60%;" data-message-key="Flash1">Flash1</div>
+  <div class="circle" style="top: 20%; left: 50%;" data-message-key="Flash2">Flash2</div>
+  <div class="circle" style="top: 60%; left: 10%;" data-message-key="Oops">Oops</div>
+  <div class="circle" style="top: 80%; left: 80%;" data-message-key="Secret">Secret</div>
+  <div class="circle" style="top: 40%; left: 40%;" data-message-key="Giggles">Giggles</div>
+  <div class="circle" style="top: 75%; left: 35%;" data-message-key="Truth">Truth</div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="modal">
+    <div id="modalContent" class="modal-content-text">
+      </div>
+    <button class="close-btn" id="closeModalBtn">Close</button>
+  </div>
+
+  <button class="next-page" id="nextPageBtn">I am excited to see next →</button>
+
+  <script>
+    // Store messages in a JavaScript object
+    const messages = {
+      "Memory": "<p>When you said, '<b>I do, more than you can imagine,</b>' my heart skipped a beat. Didn’t realize it then, but now that moment lives rent-free in my head.</p>",
+      "HateList": "<p>You annoy me to my core… but I low-key love it. Being frustrated with you is just an excuse, because that’s when you’re the sweetest. Honestly, I’m already convinced. I just play along to get more of it.</p>",
+      "LikeYou": "<p>I like everything about you – your voice, your smile, the way you think, even the way you breathe. Yeah, it's cringe. I’d puke if someone else said it. But for you? I’ve willingly become that cringe.</p>",
+      "Flash1": "<p>The day we debated about <b>Halala</b>, I was in total denial. Things got heated. I argued, resisted, and rolled my eyes a hundred times. But somehow, the way you explained it... it calmed my 106° brain down to a peaceful 97° in minutes. You simply believed — if it’s there, then it must be right, and you made sure to understand how it’s right. I’ll never forget that moment.</p>",
+      "Flash2": "<p>Aa rey pritam pyaare. Tumne naa jaana. Tum aadmi ho yaa bandar. Hum saath saath hai. Fifty Shades. Maand. Turkish fries. Chicken loaded fries. Creambell ice cream cake. KFC Tandoori Zinger burger. Leone’s pizza. Frozen Bottle. Tiramisu Grande. Honey Nut Crunch.</p><p>Everything I see, hear, or even think of somehow reminds me of you. Songs, food, movies, random concepts — it’s like you’ve sneakily marked your territory on everything I love. I honestly don’t know how, but we’ve piled up so many tiny moments that now, even the silliest things feel special. Because they have you in them.</p>",
+      "Oops": "<p>Oops, did I just fall for you again?</p>",
+      "Secret": "<p>I despise Talha Anjum. His voice grates. But somehow, he echoes through my headphones… unskipped. Unloved. Just… accepted. Because your world has quietly become mine.</p>",
+      "Giggles": "<p>You challenge me like it’s a sport, then giggle like an innocent. And somehow, I end up laughing too. Weird, but good.</p>",
+      "Truth": "<p>I know you secretly like me (or maybe even love me). You’ll never admit it, and that’s okay. You have your reasons, and I respect that. But if you ever do… just know, <b>I’ll always be here.</b> Just so you know, time’s ticking, so admit it faster 😉</p>"
+    };
+
+    // Get references to HTML elements
+    const modal = document.getElementById('modal');
+    const overlay = document.getElementById('overlay');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    const circles = document.querySelectorAll('.circle'); // Select all circles
+
+    // Function to display message in modal
+    function showMessage(event) {
+      // Use event.target.dataset.messageKey to get the key from the clicked circle
+      const key = event.target.dataset.messageKey;
+      if (messages && messages.hasOwnProperty(key)) {
+        modalContent.innerHTML = messages [key]; // Insert the message
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+      } else {
+        console.error('Message key not found:', key);
+      }
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+
+    // Function to navigate to the next page
+    function goToNext() {
+      // Replace with your actual next page URL (e.g., 'page3.html' or 'final.html')
+      window.location.href = "page3.html";
+    }
+
+    // Attach event listeners to all circles
+    circles.forEach(circle => {
+      circle.addEventListener('click', showMessage);
+    });
+
+    // Attach event listeners to modal buttons
+    closeModalBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal); // Close modal when clicking outside
+    nextPageBtn.addEventListener('click', goToNext); // Attach listener to the next page button
+  </script>
+
+</body>
+</html>

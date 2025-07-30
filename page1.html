@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Us — A Unique Connection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* NEW THEME: Deep Forest Green/Teal with Bronze/Muted Gold Accents */
+    :root {
+      --background-start: #1a362f; /* Very deep forest green/teal */
+      --background-end: #2e4a43;   /* Slightly lighter forest green/teal */
+      --text-color-light: #e0e9e6; /* Soft, slightly green-tinted off-white */
+      --text-color-dark: #1a362f;  /* Matches background start for strong contrast on buttons */
+      --accent-color: #a67c52;    /* Muted Bronze/Antique Gold - sophisticated */
+      --button-hover-color: #8c6a45; /* Darker Bronze/Antique Gold */
+      --overlay-bg: rgba(0, 0, 0, 0.7); /* Slightly darker overlay for more visual pop */
+      --border-radius-subtle: 8px;
+      --box-shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.5); /* Slightly more pronounced shadow */
+      --box-shadow-accent-light: 0 0 15px var(--text-color-light); /* A subtle, elegant glow around elements */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color-light);
+    }
+
+    body {
+      background: linear-gradient(-45deg, var(--background-start), var(--background-end));
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('001.jpg') no-repeat center center fixed; /* Your image, please ensure path is correct! */
+      background-size: cover;
+      /* Adjusted filter for the new green/bronze theme */
+      filter: grayscale(60%) brightness(50%) contrast(110%); /* Rich, subdued filter */
+      z-index: -2;
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--overlay-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .poem-box {
+      background-color: rgba(26, 54, 47, 0.85); /* Slightly increased opacity for poem box for readability, matches new background */
+      backdrop-filter: blur(8px);
+      padding: 40px 30px;
+      border-radius: var(--border-radius-subtle);
+      box-shadow: var(--box-shadow-subtle);
+      max-width: 700px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      font-size: clamp(1.1em, 2.5vw, 1.3em);
+      line-height: 1.7;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      animation: fadeInPoem 1s ease 1.0s forwards;
+      color: var(--text-color-light);
+      transform: translateY(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Style the scrollbar for better aesthetics (Webkit browsers) */
+    .poem-box::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .poem-box::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .poem-box::-webkit-scrollbar-thumb {
+      background: var(--accent-color); /* Scrollbar matches new accent */
+      border-radius: 10px;
+    }
+
+    .poem-box::-webkit-scrollbar-thumb:hover {
+      background: var(--button-hover-color); /* Scrollbar matches new hover accent */
+    }
+
+    @keyframes fadeInPoem {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #poem {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .poem-line {
+      opacity: 0;
+      animation: fadeLine 0.8s ease forwards;
+      margin-bottom: 0.5em;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .poem-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .poem-line:empty {
+      height: 1em;
+    }
+
+    @keyframes fadeLine {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .next-btn {
+      margin-top: 40px;
+      padding: 15px 35px;
+      font-size: clamp(1em, 2vw, 1.1em);
+      font-weight: 700;
+      color: var(--text-color-dark);
+      background-color: var(--accent-color); /* Button matches new accent */
+      border: none;
+      border-radius: var(--border-radius-subtle);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: var(--box-shadow-subtle);
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .next-btn:hover {
+      background-color: var(--button-hover-color); /* Button matches new hover accent */
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .fade-in-btn {
+      animation: fadeInBtn 1s ease forwards;
+    }
+
+    @keyframes fadeInBtn {
+      from { opacity: 0; }
+      to {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay">
+    <div class="poem-box" id="poem-box">
+      <div id="poem"></div>
+      <button class="next-btn" id="nextBtn">
+        Explore Our Journey →
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const poemLines = [
+      "Couldn’t Name This Even If I Tried",
+      "",
+      "I don’t know when it started.",
+      "You were just another name once,",
+      "and now somehow, everything reminds me of you.",
+      "Food, songs, random phrases, even fights.",
+      "",
+      "We argue, we joke,",
+      "you offend me like it's your full-time job",
+      "and still end up being the comfort I look for.",
+      "You drive me insane...",
+      "and yet, I like you more than I ever planned to.",
+      "",
+      "I remember things you said",
+      "— tiny things —",
+      "like that “I do, more than you can imagine.”",
+      "I didn’t know then, but my heart did a thing.",
+      "It still does.",
+      "",
+      "You're not mine.",
+      "But if this isn’t special,",
+      "then why does it feel like it?",
+      "",
+      "We never defined anything.",
+      "No label, no promises.",
+      "But in my head, we have a whole timeline.",
+      "And honestly?",
+      "I wouldn’t trade a single moment."
+    ];
+
+    const poemElement = document.getElementById('poem');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showLines() {
+      poemLines.forEach((line, i) => {
+        const p = document.createElement('div');
+        p.textContent = line;
+        p.classList.add('poem-line');
+        p.style.animationDelay = `${i * 0.9}s`; // Slightly faster line reveal
+        poemElement.appendChild(p);
+      });
+
+      // Show the button with fade-in after poem finishes
+      setTimeout(() => {
+        nextBtn.classList.add('fade-in-btn');
+        // Explicitly ensure pointer-events are enabled for immediate clickability
+        nextBtn.style.pointerEvents = 'auto';
+      }, poemLines.length * 900 + 500); // total delay based on new line delay + buffer
+    }
+
+    // Start showing lines after the poem-box itself fades in
+    // The delay for showLines should be tied to the fadeInPoem animation
+    const fadeInPoemDuration = 1000; // 1s from fadeInPoem animation
+    const fadeInPoemDelay = 1000; // 1s delay before fadeInPoem starts (from the overlay animation chain)
+    setTimeout(showLines, fadeInPoemDelay + fadeInPoemDuration - 200); // Start lines slightly before poem-box fully appears for smoother flow
+
+    // Function to navigate to the next page
+    function goToNextPage() {
+      // Small delay for any potential click sound or animation
+      setTimeout(() => {
+        window.location.href = 'page2.html'; // Ensure this is the correct next page file name
+      }, 50);
+    }
+
+    // IMPORTANT: Attach the event listener directly in JavaScript
+    // This ensures reliable click handling once 'pointer-events: auto;' is set by the animation
+    nextBtn.addEventListener('click', goToNextPage);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Credits</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    .credits {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .scroll {
+      text-align: center;
+      animation: scroll-up 60s linear infinite;
+    }
+    @keyframes scroll-up {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
+    .title {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .line {
+      margin: 15px 0;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="credits">
+    <div class="scroll">
+      <div class="title">CREDITS</div>
+      <div class="line"><b>Starring</b>: You - the calm and the storm in my little universe.</div>
+      <div class="line"><b>Directed by</b>: Destiny</div>
+      <div class="line"><b>Produced by</b>: Unplanned Conversations</div>
+      <div class="line"><b>Music</b>: Your voice, that laugh, and Talha Anjum (unfortunately)</div>
+      <div class="line"><b>Written by</b>: Every moment that made you unforgettable</div>
+      <div class="line"><b>Cinematography</b>: Through my eyes, always</div>
+      <div class="line"><b>Special Thanks</b>: For existing just the way you do</div>
+      <div class="line"><b>Still Rolling... </b>🎬</div>
+    </div>
+  </div>
+</body>
+</html>

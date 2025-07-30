@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Invitation</title>
+  <style>
+    /* CSS Variables for a consistent, professional dark theme */
+    :root {
+      --background-start: #2c3e50; /* Dark Blue-Gray */
+      --background-end: #34495e;   /* Slightly Lighter Dark Blue-Gray */
+      --text-color-light: #ecf0f1; /* Off-White for main text */
+      --text-color-dark: #2c3e50;  /* Dark Blue-Gray for button text and modal content */
+      --accent-color: #4ac6bd;    /* Professional Orange for accents */
+      --button-hover-color: #885634; /* Darker Orange on hover */
+      /* Note: These overlay/border/shadow vars are from the previous theme, kept for consistency */
+      --overlay-bg-dark: rgba(0, 0, 0, 0.75);
+      --overlay-bg-light: rgba(255, 255, 255, 0.1);
+      --border-radius-subtle: 8px;
+      --box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --box-shadow-accent: 0 0 10px var(--accent-color);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive, sans-serif; /* Retained as per your instruction */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      /* Changed background gradient colors */
+      background: linear-gradient(to top right, var(--background-start), var(--background-end));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      /* Changed heading color */
+      color: var(--text-color-light);
+      font-size: 2em;
+      margin-bottom: 30px;
+      z-index: 1;
+    }
+
+    .btn-group {
+      position: relative;
+      width: 250px;
+      height: 100px;
+      z-index: 1;
+    }
+
+    #yesBtn, #noBtn {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      /* Changed box-shadow color */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4); /* Used a darker shadow for dark theme */
+      position: absolute;
+    }
+
+    #yesBtn {
+      /* Changed Yes button background and text color */
+      background-color: var(--accent-color);
+      color: var(--text-color-dark);
+      left: 20px;
+      top: 20px;
+    }
+
+    #noBtn {
+      /* Changed No button background and text color */
+      background-color: var(--background-end);
+      color: var(--text-color-light);
+      left: 150px;
+      top: 20px;
+    }
+
+    #message {
+      margin-top: 20px;
+      /* Changed message text color */
+      color: var(--accent-color);
+      font-size: 1.2em;
+      display: none;
+      z-index: 1;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* Changed popup background and text color */
+      background: var(--background-start);
+      color: var(--text-color-light);
+      padding: 30px 40px;
+      border-radius: 15px;
+      font-size: 1.5em;
+      /* Changed box-shadow color */
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5); /* Used a darker shadow for dark theme */
+      z-index: 100;
+    }
+
+    #finalBtn {
+      display: none;
+      margin-top: 40px;
+      padding: 12px 28px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      /* Changed final button background and text color */
+      background-color: var(--accent-color);
+      color: var(--text-color-dark);
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Retained original shadow alpha for this button */
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+
+    #finalBtn:hover {
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Would you like to go on a date with me? 🥺</h1>
+
+  <div class="btn-group">
+    <button id="yesBtn" onclick="handleYes()">Yes</button>
+    <button id="noBtn" onclick="moveNo()">No</button>
+  </div>
+
+  <p id="message">Denied. Rejected. Refused. You’re going anyway. 😤</p>
+
+  <div class="popup" id="popup">Perfect! 🥰 Now come to Bangalore, be a gentleman, and take me on the date you just said yes to 💫</div>
+
+  <button id="finalBtn" onclick="goToLetter()">Final Step →</button>
+
+  <script>
+    let noClickCount = 0;
+
+    function moveNo() {
+      noClickCount++;
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      if (noClickCount < 4) {
+        let x, y;
+        let overlap = true;
+
+        while (overlap) {
+          x = Math.random() * (window.innerWidth - btnWidth - 20);  // 20px buffer
+          y = Math.random() * (window.innerHeight - btnHeight - 20);
+
+          const yesRect = yesBtn.getBoundingClientRect();
+          if (
+            x + btnWidth < yesRect.left || x > yesRect.right + 10 ||
+            y + btnHeight < yesRect.top || y > yesRect.bottom + 10
+          ) {
+            overlap = false;
+          }
+        }
+
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+        noBtn.style.position = "fixed"; /* Moved this inside the if block for initial fixed pos */
+      } else {
+        noBtn.style.display = "none";
+        document.getElementById("message").style.display = "block";
+      }
+    }
+
+    function handleYes() {
+      const popup = document.getElementById("popup");
+      const finalBtn = document.getElementById("finalBtn");
+      popup.style.display = "block";
+      setTimeout(() => {
+        popup.style.display = "none";
+        finalBtn.style.display = "inline-block";
+      }, 3000);
+    }
+
+    function goToLetter() {
+      window.location.href = "page4.html";  // replace with your actual page
+    }
+  </script>
+
+</body>
+</html>
