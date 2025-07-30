@@ -49,7 +49,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    
+
      .container {
       max-width: 800px;
       margin: auto;
@@ -308,6 +308,26 @@
         padding: clamp(10px, 3.5vw, 15px) clamp(20px, 6vw, 30px);
         font-size: clamp(0.9em, 2.5vw, 1em);
       }
+      .next-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+
+    .next-btn:hover {
+      background-color: #e63950;
+    }
 
       /* Adjust animation translation values for smaller screens if circles move too far */
       @keyframes circleFloat1 {
